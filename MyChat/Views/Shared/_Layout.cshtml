@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyChat</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="Index">MyChat</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item">
+                                <a asp-action="SearchAjax" asp-controller="Users" class="btn btn-dark">@Localizer["SearchUsers"]</a>
+                                <a asp-action="Index" asp-controller="Users" class="btn btn-dark">@Localizer["ListUsers"]</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="login_group">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form class="row" asp-action="Logout" asp-controller="Account" method="post" asp-antiforgery="true">
+                            <a asp-action="Index" asp-controller="Account">
+                                <i class="fa fa-user fa-2x" style="margin-right: 15px; display: block;" aria-hidden="true"></i>
+                            </a>
+                            <button type="submit" value="" class="brn btn-dark">@Localizer["Logout"]</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <form class="mr-2" asp-action="Login" asp-controller="Account" method="post" asp-antiforgery="true">
+                                <button type="submit" value="" class="brn btn-dark">@Localizer["Login"]</button>
+                            </form>
+                            <form asp-action="Register" asp-controller="Account" method="post" asp-antiforgery="true">
+                                <button type="submit" value="" class="brn btn-dark">@Localizer["Register"]</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - MyChat 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

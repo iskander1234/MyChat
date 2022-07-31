@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Headers">
+        <value>New User Registration</value>
+        <comment>Заговловок Регистрации</comment>
+    </data>
+    <data name="Email">
+        <value>Email</value>
+        <comment>Лабел Email</comment>
+    </data>
+    <data name="UserName">
+        <value>User Name</value>
+        <comment>Лабел пользователь</comment>
+    </data>
+    <data name="FirstName">
+        <value>Name</value>
+        <comment>Лабел наименование пользователя</comment>
+    </data>
+    <data name="BirthDate">
+        <value>Date of Birth</value>
+        <comment>Лабел Дата рождене</comment>
+    </data>
+    <data name="File">
+        <value>Profile photo</value>
+        <comment>Лабел фотографии</comment>
+    </data>
+    <data name="Password">
+        <value>Pasword</value>
+        <comment>Лабел для пароль</comment>
+    </data>
+    <data name="ConfirmPassword">
+        <value>Re-enter Password</value>
+        <comment>Лабел для пароль повторно</comment>
+    </data>
+    <data name="Show">
+        <value>Show password</value>
+        <comment>Галочка для показа пароля</comment>
+    </data>
+    <data name="Check">
+        <value>Check in</value>
+        <comment>Кнопка Регистрация</comment>
+    </data>
+    
+</root>

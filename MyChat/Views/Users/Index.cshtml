@@ -1,0 +1,10 @@
+﻿@model List<User>
+
+@{
+    ViewBag.Title = "Пользователи";
+    Layout = "_Layout";
+}
+
+@{
+    await Html.RenderPartialAsync("UsersPartial", Model);
+}

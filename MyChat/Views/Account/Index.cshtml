@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer 
+
+@using Microsoft.AspNetCore.Identity
+@model User
+@inject UserManager<User> UserManager
+@{
+    ViewBag.Title = "Профиль пользователя";
+    Layout = "_Layout";
+}
+
+<div class="twPc-div">
+	<div style="padding: 10px;">
+		<a asp-action="Index" asp-controller="Account" asp-route-id="@Model.Id">
+			<img alt="@Model.FirstName" src="~/@Model.AvatarPath" class="avatarImg" style="border-radius: 50%;height: 100px;width: 100px;border: solid cyan;">
+		</a>
+		<div class="divUser mt-3">
+			<div class="divName">
+				<a asp-action="Index" asp-controller="Account" asp-route-id="@Model.Id">
+					<b>@Model.Email</b>
+				</a>
+			</div>
+		</div>
+		<div class="row" style="margin-left: 210px; margin-top: -145px; display: block">
+			<div>
+				<p>
+					<b>@Localizer["UserName"] : </b> @Model.UserName</p>
+			</div>
+			<div>
+				<p>
+					<b>@Localizer["FirstName"] : </b> @Model.FirstName</p>
+			</div>
+			<div>
+				@if (Model.BirthDate != null)
+				{
+					<p>
+						<b>@Localizer["BirthDate"] : </b> @Model.BirthDate.Value.ToShortDateString()</p>  
+				}
+			</div>
+		</div>
+		@if (UserManager.GetUserId(User) == Model.Id)
+		{
+			<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-info" style="margin-top: -105px; margin-left: 580px;">@Localizer["Edit"]</a>
+			<a asp-action="DetailedInformationEmail" asp-controller="Account" asp-route-id="@Model.Id" class="btn btn-outline-info" style="margin-top: -60px; margin-left: 580px;">Отправить в Email информацию</a>
+			
+		}
+		else if (User.IsInRole("admin"))
+		{
+			<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-info" style="margin-top: -105px; margin-left: 580px;">@Localizer["Edit"]</a>
+		}
+	</div>
+</div>
+
+<div class="" style="text-align: center">
+	@{
+		await Html.RenderPartialAsync("PartialView/MessagePartialView", Model);
+	}
+</div>
+
+@section Scripts
+{
+	<script>
+    function openForm(userId) {
+       $("#answerdiv-" + userId).show();
+    }
+    function sendMessage(userId) {
+        $("#userId-" + userId).val();
+      $.ajax({
+        url : '@Url.Action("Message" , "Account")',
+        type : 'POST',
+        data : {
+            'userId' : userId,
+            'message' : $("#answertext-" + userId).val()
+        },
+        success: function(data) {
+            $("#result").html(data);
+        }
+      })
+    }
+    </script>
+}

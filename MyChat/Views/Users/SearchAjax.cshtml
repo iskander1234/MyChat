@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer 
+
+@{
+    ViewBag.Title = "Поиск пользователей";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <input class="form-control" type="text" id="search" placeholder="@Localizer["Search"]" style="width: 235px;">
+        <input type="button" id="submit" class="btn btn-outline-info" value="@Localizer["ToFind"]" style="margin-left: 247px; margin-top: -68px;">
+    </div>
+</div>
+
+<div id="results"></div>
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+           $('#submit').click(function(event) {
+             event.preventDefault();
+             search()
+          })
+          $("#search").keyup(function() {
+            search()
+          })
+        });
+        
+        function search() {
+          var searchKey = $("#search").val();
+          searchKey = encodeURIComponent(searchKey);
+         $.get('@Url.Action("SearchAjaxResult", "Users")', {keyWord : searchKey} , function(data) {
+             if (data === false)
+                $("#results").html("<h3>Поиск не дал результатов</h3>");
+             else 
+                $("#results").html(data);
+          });
+        }
+    </script>
+}
+

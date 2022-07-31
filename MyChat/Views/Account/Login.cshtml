@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer 
+
+@model MyChat.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Вход";
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center">@Localizer["Headers"]</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post" asp-controller="Account" asp-action="Login"
+              asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label>@Localizer["Email"]</label><br/>
+                <input class="form-control" asp-for="Email"/>
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label >@Localizer["Password"]</label><br/>
+                <input type="password" class="form-control password" asp-for="Password"/>
+                <label >
+                    <input class="show-password" type="checkbox"> @Localizer["Show"]
+                </label>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer["RememberMe"]</label>
+                <input class="form-check-inline" asp-for="RememberMe"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="submit" value="@Localizer["ComeIn"]"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+            let showPassword = document.querySelectorAll(
+                '.show-password'
+            );
+            showPassword.forEach(item =>
+            item.addEventListener('click', toggleType)
+            );
+            function toggleType() {
+                let input = this.closest('.form-group').querySelector('.password');
+                if (input.type === 'password'){
+                    input.type = 'text';
+                }else{
+                    input.type = 'password';
+                }
+            }   
+    </script>
+}
